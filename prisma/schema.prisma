@@ -14,9 +14,11 @@ datasource db {
 }
 
 model Categories {
-  id      Int       @id @default(autoincrement())
-  name    String
-  product Product[]
+  id         Int       @id @default(autoincrement())
+  name       String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  product    Product[]
 
   @@map("categories")
 }
@@ -28,6 +30,8 @@ model Product {
   image       String?
   category_id Int
   categories  Categories @relation(fields: [category_id], references: [id])
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
 
   @@map("product")
 }
